@@ -1,11 +1,17 @@
 package com.lab2;
 
 import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 
-@WebService // Позначає що це інтерфейс веб-сервісу
+// Інтерфейс для веб-сервісу конвертації валют
+@WebService(targetNamespace = "http://lab2.com/")
 public interface CurrencyService {
 
-    @WebMethod // Метод доступний через SOAP
-    double getExchangeRate(String fromCurrency, String toCurrency);
+    // Метод для отримання курсу обміну валют
+    @WebMethod
+    double getExchangeRate(
+            @WebParam(name = "fromCurrency") String fromCurrency, // Код валюти джерела
+            @WebParam(name = "toCurrency") String toCurrency      // Код валюти призначення
+    );
 }
